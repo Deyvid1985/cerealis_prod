@@ -26,17 +26,30 @@ function calcular() {
         unidadesPorCaixa = 6;
     }
 
-    // 2. Cálculos
+    // 2. Cálculos principais
     let totalCaixas = pac / unidadesPorCaixa;
     let totalPaletes = totalCaixas / pal;
 
-    // 3. Exibir resultado
+    // 3. Lógica de Tonelagem (Descartando o que não completou palete)
+    let paletesCompletos = Math.floor(totalPaletes); // Pega apenas o número inteiro
+    
+    // Peso por palete (Caixas por palete * pacotes por caixa * peso do pacote) / 1000
+    // Usamos 'pal' (tipo de palete) para saber quanto pesa um palete cheio
+    let quilosPorPalete = (pal * unidadesPorCaixa * pes) / 1000;
+    let toneladasProduzidas = (paletesCompletos * quilosPorPalete) / 1000;
+
+    // 4. Exibir resultado
     res.innerHTML = "<strong>Relatório de Produção:</strong>";
     res.innerHTML += `<p>📦 Total de Caixas: <strong>${totalCaixas.toFixed(1)}</strong></p>`;
     res.innerHTML += `<p>🚚 Total de Paletes: <strong>${totalPaletes.toFixed(2)}</strong></p>`;
     
+    // Novo campo de Tonelagem
+    res.innerHTML += `<hr>`;
+    res.innerHTML += `<p>⚖️ Tonelagem (Paletes Fechados): <strong>${toneladasProduzidas.toFixed(3)} Ton</strong></p>`;
+    res.innerHTML += `<p><small>(${paletesCompletos} paletes de ${quilosPorPalete}kg cada)</small></p>`;
+    
     // Dica visual extra:
     if (totalCaixas % 1 !== 0) {
-        res.innerHTML += `<p style="color: red;"><small>* Atenção: Existem caixas incompletas (sobra de pacotes).</small></p>`;
+        res.innerHTML += `<p style="color: red;"><small>* Atenção: Existem caixas incompletas.</small></p>`;
     }
 }
