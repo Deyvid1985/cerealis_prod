@@ -42,8 +42,6 @@ function calcular() {
     res.innerHTML = "<strong>Relatório de Produção:</strong>";
     res.innerHTML += `<p>📦 Total de Caixas: <strong>${totalCaixas.toFixed(1)}</strong></p>`;
     res.innerHTML += `<p>🚚 Total de Paletes: <strong>${totalPaletes.toFixed(2)}</strong></p>`;
-    
-    // Novo campo de Tonelagem
     res.innerHTML += `<hr>`;
     res.innerHTML += `<p>⚖️ Tonelagem (Paletes Fechados): <strong>${toneladasProduzidas.toFixed(3)} Ton</strong></p>`;
     res.innerHTML += `<p><small>(${paletesCompletos} paletes de ${quilosPorPalete}kg cada)</small></p>`;
