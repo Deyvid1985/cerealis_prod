@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo Produção</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <header>
+        <h1>Cálculo Produção</h1>
+    </header>
+
+    <section>
+        <div>
+            <p>Quantidade de pacotes produzidos:
+                <input type="number" id="pac_num" placeholder="Ex: 1600">
+            </p>
+
+            <p>Peso do pacote:
+                <select id="pes_num">
+                    <option value="500">500g (20 pcts/cx)</option>
+                    <option value="1000">1000g (10 pcts/cx)</option>
+                    <option value="2000">2000g (6 pcts/cx)</option>
+                </select>
+            </p>
+
+            <p>Tipo de palete:
+                <select id="pal_num">
+                    <option value="60">Palete de 60 caixas</option>
+                    <option value="80">Palete de 80 caixas</option>
+                </select>
+            </p>
+            
+            <input type="button" value="Calcular" onclick="calcular()">
+        </div>
+        <div id="res">
+            Preencha os dados e clique em Calcular.
+        </div>
+</section>
+
+    <footer>
+        <p>&copy; Produção Cerealis</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

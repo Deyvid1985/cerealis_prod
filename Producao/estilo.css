@@ -1,0 +1,91 @@
+body {
+    background-color: #f4f4f4;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+header {
+    color: #333;
+    text-align: center;
+    padding: 20px;
+}
+
+section {
+    background-color: white; 
+    border-radius: 10px;
+    padding: 30px;
+    width: 400px;
+    margin: 20px auto;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+/* ESTILO DOS INPUTS E SELECTS */
+p {
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 5px;
+}
+
+input[type="number"], select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* BOTÃO CALCULAR */
+input[type="button"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+input[type="button"]:hover {
+    background-color: #27ae60;
+}
+
+#res {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(240, 240, 240, 0.8);
+    border-left: 5px solid #2ecc71;
+    color: #333;
+    border-radius: 0 5px 5px 0;
+    min-height: 40px;
+}
+
+
+footer {
+    margin-top: auto; 
+    padding: 20px; /* Reduzi de 40px para 20px */
+    text-align: center;
+    color: #777;
+    font-style: italic;
+    
+    background-image: url('cerealis.png');
+    background-repeat: no-repeat;
+    background-position: center top; 
+    background-size: 100px; /* Diminuí um pouco a logo para caber melhor */
+}
+
+footer p {
+    margin-top: 45px; /* Reduzi de 60px para 45px para aproximar o texto da logo */
+    font-weight: normal;
+    font-size: 0.85em;
+    margin-bottom: 0; /* Garante que não haja espaço extra embaixo */
+}
