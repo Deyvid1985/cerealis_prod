@@ -1,39 +1,57 @@
-document.querySelector('input[type="button"]').addEventListener('click', function() {
-    // Pequeno atraso para garantir que o primeiro script preencheu a div #res
-    setTimeout(() => {
-        let resElement = document.getElementById("res");
-        let conteudoRes = resElement.innerText;
+// Esta função será chamada pelo script principal ou pelo clique
+function enviarWhatsApp() {
+    let resElement = document.getElementById("res");
+    
+    // Pegamos apenas o texto, ignorando o botão que criamos
+    let conteudoRes = resElement.innerText.replace("Enviar para WhatsApp", "");
+
+    if (conteudoRes.includes("[ERRO]") || conteudoRes.includes("Preencha os dados")) {
+        return;
+    }
+
+    let nomeMaquina = prompt("Digite o nome ou número da máquina:");
+    if (nomeMaquina == null || nomeMaquina == "") {
+        nomeMaquina = "Não informada";
+    }
+
+    let agora = new Date();
+    let dataHora = agora.toLocaleDateString('pt-BR') + " às " + 
+                   agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+    let mensagemWhatsApp = `*RELATÓRIO DE PRODUÇÃO*\n`;
+    mensagemWhatsApp += `--------------------------\n`;
+    mensagemWhatsApp += `*Máquina:* ${nomeMaquina}\n`;
+    mensagemWhatsApp += `*Data:* ${dataHora}\n`;
+    mensagemWhatsApp += `--------------------------\n`;
+    mensagemWhatsApp += conteudoRes;
+
+    let url = `https://api.whatsapp.com/send?text=${encodeURIComponent(mensagemWhatsApp)}`;
+    window.open(url, '_blank');
+}
+
+// Observa o campo de resultado. Quando o cálculo aparecer, ele cria o botão.
+const targetNode = document.getElementById('res');
+const observer = new MutationObserver((mutations) => {
+    // Se o resultado mudou e não contém o botão ainda, e não é o erro
+    if (!document.getElementById('btnWhats') && !targetNode.innerText.includes("[ERRO]")) {
         
-        // Verifica se houve erro antes de prosseguir
-        if (conteudoRes.includes("[ERRO]") || conteudoRes.includes("Preencha os dados")) {
-            return;
-        }
-
-        // 1. Pede o nome da máquina ao usuário
-        let nomeMaquina = prompt("Digite o nome ou número da máquina:");
-        if (nomeMaquina == null || nomeMaquina == "") {
-            nomeMaquina = "Não informada";
-        }
-
-        // 2. Obtém data e hora atual
-        let agora = new Date();
-        let dataHora = agora.toLocaleDateString('pt-BR') + " às " + 
-                       agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-
-        // 3. Formata a mensagem para o WhatsApp
-        // Usamos asteriscos (*) para deixar em negrito no WhatsApp
-        let mensagemWhatsApp = `*RELATÓRIO DE PRODUÇÃO*\n`;
-        mensagemWhatsApp += `--------------------------\n`;
-        mensagemWhatsApp += `*Máquina:* ${nomeMaquina}\n`;
-        mensagemWhatsApp += `*Data:* ${dataHora}\n`;
-        mensagemWhatsApp += `--------------------------\n`;
-        mensagemWhatsApp += conteudoRes;
-
-        // 4. Cria a URL sem número (abre a lista de contatos)
-        let url = `https://api.whatsapp.com/send?text=${encodeURIComponent(mensagemWhatsApp)}`;
-
-        // 5. Abre o WhatsApp
-        window.open(url, '_blank');
+        let btn = document.createElement("button");
+        btn.id = "btnWhats";
+        btn.innerHTML = "📲 Enviar para WhatsApp";
+        btn.style.marginTop = "15px";
+        btn.style.padding = "10px";
+        btn.style.backgroundColor = "#25D366";
+        btn.style.color = "white";
+        btn.style.border = "none";
+        btn.style.borderRadius = "5px";
+        btn.style.cursor = "pointer";
+        btn.style.fontWeight = "bold";
+        btn.style.width = "100%";
         
-    }, 150); 
+        btn.onclick = enviarWhatsApp;
+        targetNode.appendChild(document.createElement("br"));
+        targetNode.appendChild(btn);
+    }
 });
+
+observer.observe(targetNode, { childList: true });
