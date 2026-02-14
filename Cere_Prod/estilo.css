@@ -77,7 +77,7 @@ footer {
     color: #777;
     font-style: italic;
     
-    background-image: url('cerealis.png');
+    /*background-image: url('cerealis.png');*/
     background-repeat: no-repeat;
     background-position: center top; 
     background-size: 100px; /* Diminuí um pouco a logo para caber melhor */
